@@ -18,5 +18,10 @@ exapmle PORT=(enter in port number here)
 # Note:
 - worked on lab 06 with a bunch of classmates and reviewed demo/lecture video.
 
+
+# UML
+
+- ![UML](./src//UML.png)
+
 ### Collaborators:
 - Lab 06 - Zoom Video(David), Luis, Danny, Sarah, Jim.
