@@ -28,6 +28,7 @@ app.use(logger);
 app.use(foodRoutes);
 app.use(clothesRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 
 // STRETCH GOAL
 // app.use('/api/v1', v1Routes);

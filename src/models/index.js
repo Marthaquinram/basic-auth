@@ -13,7 +13,8 @@ const foodSchema = require('./food/model.js');
 const clothesSchema = require('./clothes/model.js');
 const recipeSchema = require('./recipe/model.js');
 const foodRecipeSchema = require('./foodRecipe/model.js');
-const userSchema = require('./user/models');
+const userSchema = require('./users/models');
+
 
 // const sequelizeOptions = process.env.NODE_ENV === 'production' ? {
 //     dialectOptions: {
