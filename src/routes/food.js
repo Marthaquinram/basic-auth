@@ -23,7 +23,7 @@ async function getFood(req, res) {
 
 async function getOneFood(req, res) {
     const id = req.params.id;
-    let theFood = await FoodCollection.read(id)
+    let theFood = await FoodCollection.read(id);
     res.status(200).json(theFood);
 }
 
@@ -36,7 +36,7 @@ async function createFood(req, res) {
 async function updateFood(req, res) {
     const id = req.params.id;
     const obj = req.body;
-    let updatedFood = await FoodCollection.update(id, obj)
+    let updatedFood = await FoodCollection.update(id, obj);
     res.status(200).json(updatedFood);
 }
 
@@ -44,6 +44,14 @@ async function deleteFood(req, res) {
     let id = req.params.id;
     let deletedFood = await FoodCollection.delete(id);
     res.status(200).json(deletedFood);
+    // if (req.user && req.user.role !== 'admin') 
+    if (req.user?.role !== 'admin') {
+        res.status(403).send('Unauthorized for this action');
+    } else {
+        let id = req.params.id;
+        let deletedFood = await FoodCollection.delete(id);
+        res.status(200).json(deletedFood);
+    }
 }
 
 
