@@ -19,9 +19,11 @@ async function signinUser(req, res) {
         const user = await Users.model.findOne({
             where: { username: req.body.username },
         });
+        console.log('HEEEEEEYYYYYYYYY', user);
         const isValid = await bcrypt.compare(req.body.password, user.password);
         if (isValid) {
-            res.status(200).send(user);
+            res.status(200).send({ user: user.username, token: user.token });
+            // console.log(user);
             return;
         }
     } catch (e) {
