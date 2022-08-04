@@ -41,10 +41,10 @@ async function updateFood(req, res) {
 }
 
 async function deleteFood(req, res) {
-    let id = req.params.id;
-    let deletedFood = await FoodCollection.delete(id);
-    res.status(200).json(deletedFood);
-    // if (req.user && req.user.role !== 'admin') 
+    // let id = req.params.id;
+    // let deletedFood = await FoodCollection.delete(id);
+    // res.status(200).json(deletedFood);
+    // if (req.user && req.user.role !== 'admin')
     if (req.user?.role !== 'admin') {
         res.status(403).send('Unauthorized for this action');
     } else {

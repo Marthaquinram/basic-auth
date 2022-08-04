@@ -4,6 +4,7 @@ const { server } = require('../src/server.js');
 const { db } = require('../src/models/index.js');
 const supertest = require('supertest');
 const mockRequest = supertest(server);
+
 // const bcrypt = require('bcrypt');
 
 describe('web server authentication', () => {
@@ -36,11 +37,14 @@ describe('web server authentication', () => {
             .send({ username: 'test user', password: 'test password' });
         const response = await mockRequest
             .post('/signin')
-            .send({ username: 'test user', password: 'test password' });
+            .send({ username: 'test user', password: 'test password', role: 'admin' });
 
         expect(response.status).toBe(200);
-        expect(response.body.username).toEqual('test user');
+
+        console.log("im HEEEEERE", response);
+        expect(response.body.user).toEqual('test user');
         expect(response.body.password.startsWith('$2b$10$')).toBe(true);
+
     });
 
     it('enforces unique users', async () => {
