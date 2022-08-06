@@ -7,10 +7,17 @@ const router = express.Router();
 async function signupUser(req, res) {
     try {
         let obj = req.body;
-        let newUsers = await Users.create(obj);
-        res.status(200).json(newUsers);
+        const findName = await Users.model.findOne({
+            where: { username: req.body.username }
+        });
+        if (findName === null) {
+            let newUsers = await Users.create(obj);
+            res.status(200).json(newUsers);
+        } else {
+            res.status(500).send(`Cannot create user ${req.body.username}`);
+        }
     } catch (e) {
-        res.status(500).send(`Cannot create user ${req.body.username}`);
+        console.log(e);
     }
 }
 
@@ -19,10 +26,11 @@ async function signinUser(req, res) {
         const user = await Users.model.findOne({
             where: { username: req.body.username },
         });
-        console.log('HEEEEEEYYYYYYYYY', user);
+        // console.log('HEEEEEEYYYYYYYYY', user);
         const isValid = await bcrypt.compare(req.body.password, user.password);
         if (isValid) {
-            res.status(200).send({ user: user.username, token: user.token });
+            res.status(200).json(user);
+
             // console.log(user);
             return;
         }
