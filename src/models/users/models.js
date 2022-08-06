@@ -4,6 +4,7 @@
 //     password = await bcrypt.hash(password);
 //     const user = UserCollection.create({ username, password });
 // }
+require("dotenv").config();
 
 const SECRET = process.env.SECRET;
 const HASH_STRENGTH = 10;
