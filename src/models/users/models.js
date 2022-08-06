@@ -20,7 +20,7 @@ const userModel = (sequelize, DataTypes) => {
             type: DataTypes.VIRTUAL, //this means this isnt going to get stored in the data base, only avail. at runtime
             get() {
                 const payload = { username: this.username, role: this.role };
-                return jwt.sign(payload, SECRET);
+                return jwt.sign(payload, SECRET, { expiresIn: process.env.JWTEXPIRES });// JWT expires in 1 min. tested in Insomnia/Postman/Thunderclient and it works. entered into .env
             },
         },
     });
