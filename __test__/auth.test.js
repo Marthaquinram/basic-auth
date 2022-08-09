@@ -41,8 +41,8 @@ describe('web server authentication', () => {
 
         expect(response.status).toBe(200);
 
-        console.log("im HEEEEERE", response);
-        expect(response.body.user).toEqual('test user');
+        // console.log("im HEEEEERE", response);
+        expect(response.body.username).toEqual('test user');
         expect(response.body.password.startsWith('$2b$10$')).toBe(true);
 
     });
