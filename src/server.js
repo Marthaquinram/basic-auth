@@ -9,13 +9,12 @@ const errorHandler = require('./error-handlers/500.js');
 const logger = require('./middleware/logger.js');
 const authRoutes = require('./middleware/auth/route.js');
 
-const foodRoutes = require('./routes/food.js');
-const clothesRoutes = require('./routes/clothes.js');
-// const userRoutes = require('./routes/user.js');
 const validateToken = require('./middleware/auth/auth');
+const { Food, Clothes, Users } = require('./models/index');
 
 // STRETCH GOAL
-// const v1Routes = require('./routes/v1.js');
+const v1Routes = require('./routes/v1.js');
+const v2Routes = require('./routes/v2.js');
 
 const app = express();
 
@@ -25,17 +24,14 @@ app.use(express.json());
 // Our own Global Middleware
 app.use(logger);
 
+app.use('/v1', v1Routes([Food, Clothes]));
 app.use(authRoutes);
 app.use(validateToken);
+app.use('/v2', v2Routes([Food, Clothes, Users]));
 
-// Use our routes from the routing module...
-app.use(foodRoutes);
-app.use(clothesRoutes);
-// app.use(authRoutes);
-// app.use(userRoutes);
+
 
 // STRETCH GOAL
-// app.use('/api/v1', v1Routes);
 
 // Our Error Handlers -- need to be the last things defined!
 // These use the external modules we required above

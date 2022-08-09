@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-function v1Router(collections) {
+function v2Router(collections) {
     const router = express.Router();
     for (const collection of collections) {
         console.log(`Building collection routes`, collection.model.name);
@@ -16,15 +16,15 @@ function v1Router(collections) {
 function authRouter(collection) {
     const router = express.Router();
 
-    // function isAllowed(levels) {
-    //     return function isAllowedMiddleware(req, res, next) {
-    //         if (req.user && levels.includes(req.user.role)) {
-    //             next();
-    //         } else {
-    //             res.status(401).send(`User has insufficient privileges`);
-    //         }
-    //     };
-    // }
+    function isAllowed(levels) {
+        return function isAllowedMiddleware(req, res, next) {
+            if (req.user && levels.includes(req.user.role)) {
+                next();
+            } else {
+                res.status(401).send(`User has insufficient privileges`);
+            }
+        };
+    }
 
     // RESTful Route Handlers
     async function handleGetAll(req, res) {
@@ -66,11 +66,11 @@ function authRouter(collection) {
     // RESTful Route Declarations
     router.get(`/`, handleGetAll);
     router.get(`/:id`, handleGetOne);
-    router.post(`/`, handleCreate);
-    router.put(`/:id`, handleUpdate);
-    router.delete(`/:id`, handleDelete);
+    router.post(`/`, isAllowed(['writer', 'editor', 'admin']), handleCreate);
+    router.put(`/:id`, isAllowed(['editor', 'admin']), handleUpdate);
+    router.delete(`/:id`, isAllowed(['admin']), handleDelete);
 
     return router;
 }
 
-module.exports = v1Router;
+module.exports = v2Router;

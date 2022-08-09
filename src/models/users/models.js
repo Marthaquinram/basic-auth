@@ -31,7 +31,7 @@ const userModel = (sequelize, DataTypes) => {
         let hashedPassword = await bcrypt.hash(user.password, HASH_STRENGTH);
         console.log(hashedPassword);
         user.password = hashedPassword;
-        user.role = 'admin';
+        user.role;
         //now , all the handler needs to do is call new User(username, password).create
     });
 
