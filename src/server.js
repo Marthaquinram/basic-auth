@@ -13,8 +13,8 @@ const validateToken = require('./middleware/auth/auth');
 const { Food, Clothes, Users } = require('./models/index');
 
 // STRETCH GOAL
-const v1Routes = require('./routes/v1.js');
-const v2Routes = require('./routes/v2.js');
+const v1Routes = require('./routes/v1');
+const v2Routes = require('./routes/v2');
 
 const app = express();
 
