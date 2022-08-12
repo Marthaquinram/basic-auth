@@ -14,6 +14,8 @@ Authentication Server Phase 3: Role Based Access Control
 Being able to login is great. But controlling access at a more granular level is vital to creating a scalable system. In this lab, you will implement Role Based Access Control (RBAC) using an Access Control List (ACL), allowing to not only restrict access to routes for valid users, but also based on the individual permissions we give each user.
 
 
+## Approach & Efficiency
+- Lab 08 : I made sure to read the instruction completely and not skim it. David gave us the solution code for v1, and based on the assignment we  had to create a second route called v2. I did some refactoring, and a lot of troubleshooting, which helped a lot with understanding all the moving parts.
 
 # Pull Request
 - [Github-Action]("not passing right now")
@@ -45,4 +47,5 @@ I tested routes and JWT in Thunderclient, Postman, Insomnia and it worked.
 
 ### Collaborators:
 - Lab 06 - Zoom Video(David), Luis, Danny, Sarah, Jim, Tony.
+- Lab 07 - Zayah, Jim, Danny, Sarah, Tony
 - Lab 08 -  Danny C. and  Tony R.
